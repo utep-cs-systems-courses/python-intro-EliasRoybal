@@ -3,7 +3,7 @@ import sys
 
 #Takes arguments from command line and set input and output files
 inputTextfile = sys.argv[1]
-#outputFile = sys.argv[2]
+outputTextfile = sys.argv[2]
 
 #opens file to read
 inputFile = open(inputTextfile, "r")
@@ -13,16 +13,19 @@ wordDict = dict()
 
 #Goes through file line by line
 for line in inputFile:
-    #gets rid of any characters for new line
+    #removes any whitespace and makes all words lowercase
     line = line.strip()
+    line = line.lower()
     
-    #this splits at any punctuation or whitespace
-    wordsInLine = re.split('[ \t]',line)
+    #this splits at any punctuation
+    wordsInLine = line.split()
     
     #This iterates through each word in every line read
     for word in wordsInLine:
+        #Removes any white space or punctuation
+        word = re.sub('[^A-Za-z0-9]+','',word)
+
         if word in wordDict:
-           # word = word.strip(".,!?:;'\")
             #increments the word count if word is already in the dictionary
             wordDict[word] = wordDict[word]+1
 
@@ -33,6 +36,10 @@ for line in inputFile:
 wordList = list(wordDict.keys())
 wordList.sort()
 
+
+outputFile = open(outputTextfile, 'w')
+
 #Tests out that some list prints out
 for key in wordList:
-    print(key, ":", wordDict[key])
+    outputFile.write(key)
+    outputFile.write("\n")
