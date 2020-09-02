@@ -39,7 +39,11 @@ wordList.sort()
 
 outputFile = open(outputTextfile, 'w')
 
-#Tests out that some list prints out
-for key in wordList:
-    outputFile.write(key)
+#Writes sorted words and counter to file
+for key in sorted(wordDict):
+    #converts line with word and counter to string so it becomes writable
+    wordDictString = str(key)+ " " + str(wordDict[key])
+    outputFile.write(wordDictString)
     outputFile.write("\n")
+   # outputFile.write(key)
+   # outputFile.write(wordDict[key])
