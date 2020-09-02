@@ -1,9 +1,8 @@
 import re
 import sys
 
-#Takes arguments from command line and set input and output files
+#Takes arguments from command line to set input file
 inputTextfile = sys.argv[1]
-outputFile = sys.argv[2]
 
 #opens file to read
 inputFile = open(inputTextfile, "r")
@@ -21,7 +20,6 @@ for line in inputFile:
     #This iterates through each word in every line read
     for word in wordsInLine:
         if word in wordDict:
-           # word = word.strip(".,!?:;'\")
             #increments the word count if word is already in the dictionary
             wordDict[word] = wordDict[word]+1
         else:
@@ -30,7 +28,3 @@ for line in inputFile:
 
 wordList = list(wordDict.keys())
 wordList.sort()
-
-#Tests out that some list prints out
-for key in wordList:
-    print(key, ":", wordDict[key])
